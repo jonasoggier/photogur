@@ -1,41 +1,36 @@
 class PicturesController < ApplicationController
-	before_filter :load_pictures
-
+	
 	def index
+		@pictures = Picture.all   #returns a collection (in the form of an array) of pictures (which are instances of the Picture class)
 	end
 
 	def show
-		@picture = @pictures[params[:id].to_i]
+		@picture = Picture.find(params[:id])
 	end
 
 	def new
 	end
 
-	def create
-		#render :text => "Saving a picture."
-		
+	def create  # we could use the same notation as for the 'update' method below
+		@picture = Picture.new
+		@picture.title = params[:title]
+		@picture.artist = params[:artist]
+		@picture.url = params[:url]
+		success = @picture.save
+		if success
+			redirect_to pictures_path
+		end
 	end
 
-	def load_pictures
-		@pictures = [
-	      {
-	        :title  => "The old church on the coast of White sea",
-	        :artist => "Sergey Ershov",
-	        :url    => "http://monicao.s3.amazonaws.com/bitmaker/house.jpg"
-	      },
-	      {
-	        :title  => "Sea Power",
-	        :artist => "Stephen Scullion",
-	        :url    => "http://monicao.s3.amazonaws.com/bitmaker/wave.jpg"
-	      },
-	      {
-	        :title  => "Into the Poppies",
-	        :artist => "John Wilhelm",
-	        :url    => "http://monicao.s3.amazonaws.com/bitmaker/girl.jpg"
-	      }
-	    ]
+	def edit
+		@picture = Picture.find(params[:id])
 	end
 
+	def update  # no saving necessary as update_attributes does this already
+		@picture = Picture.find(params[:id])
+		@picture.update_attributes(:title => params[:title], :artist => params[:artist], :url => params[:url])
+		redirect_to pictures_path
+	end
 
 end
 
