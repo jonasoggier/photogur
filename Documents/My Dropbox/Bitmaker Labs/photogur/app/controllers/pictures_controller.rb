@@ -9,28 +9,47 @@ class PicturesController < ApplicationController
 	end
 
 	def new
+		@picture = Picture.new
 	end
 
 	def create  # we could use the same notation as for the 'update' method below
-		@picture = Picture.new
-		@picture.title = params[:title]
-		@picture.artist = params[:artist]
-		@picture.url = params[:url]
-		success = @picture.save
-		if success
+		# @picture = Picture.new
+		# @picture.title = params[:title]
+		# @picture.artist = params[:artist]
+		# @picture.url = params[:url]
+		
+		@picture = Picture.new(params[:picture])  
+		if @picture.save
 			redirect_to pictures_path
+		else
+			flash.now[:error] = "Could not save the picture"
+			render :new  # render goes to controller and renders VIEW for #new action (without running the code in PicturesController#new!!) => keep data in form
 		end
 	end
 
 	def edit
-		@picture = Picture.find(params[:id])
+		@picture = Picture.find(params[:id])   
 	end
 
 	def update  # no saving necessary as update_attributes does this already
-		@picture = Picture.find(params[:id])
-		@picture.update_attributes(:title => params[:title], :artist => params[:artist], :url => params[:url])
-		redirect_to pictures_path
+		@picture = Picture.find(params[:id])  # see comments below
+		if @picture.update_attributes(params[:picture])  # see comments below
+			redirect_to @picture  # alternatively: 'redirect_to picture_path(@picture)'
+		else
+			# do something else
+		end
 	end
 
 end
 
+
+# This is what the params looks like after submitting the form
+
+# params = {
+# 	:id => "2"
+# 	:picture => {
+# 		:title => "some title"
+# 		:artist => "some artist"
+# 		:url => "some url"
+# 	}
+# }

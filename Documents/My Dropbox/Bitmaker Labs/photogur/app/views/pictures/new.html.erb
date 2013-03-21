@@ -1,19 +1,29 @@
 <h1>Add a picture</h1>
 
-<%= form_tag "/pictures" do %>
+<div class="errors">
+	<%= flash[:error] %>
+</div>
+
+<%= form_for @picture do |f| %>  <!-- Rails knows where to post because it understands the routes for the "new" action in routes.rb -->
 	<p>
 		<label>Artist</label><br>
-		<%= text_field_tag "artist" %>
+		<% if @picture.errors.messages[:artist] %>
+			<p><%= @picture.errors.messages[:artist][0] %></p>
+		<% end %>
+		<!-- alternatively: @picture.errors[:artist].first -->
+		<%= f.text_field "artist" %>
 	</p>	
 	<p>
 		<label>Title</label><br>
-		<%= text_field_tag "title" %>
+		<%= @picture.errors[:title].first %>
+		<%= f.text_field "title" %>
 	</p>
 	<p>
 		<label>URL</label><br>
-		<%= text_field_tag "url" %>
+		<%= @picture.errors[:url].first %>
+		<%= f.text_field "url" %>
 	</p>
 	<p>
-		<input type="submit">
+		<%= f.submit "Save" %>
 	</p>
 <% end %>
