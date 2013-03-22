@@ -2,4 +2,9 @@
 <h3><%= @picture.artist %></h3>
 <img src="<%= @picture.url %>">
 
+<% if @picture.copyrighted %> <!-- i.e. if 'true' -->
+	<p>This picture is copyrighted.</p>
+<% end %>
+
 <%= link_to "Edit Picture", edit_picture_path(@picture) %>
+<%= link_to "Delete", @picture, :method => :delete, :confirm => "Are you sure you want to delete this picture" %>

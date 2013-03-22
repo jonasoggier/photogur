@@ -19,6 +19,11 @@
 		<%= f.text_field "url" %>
 	</p>
 	<p>
+		<%= f.check_box "copyrighted" %>
+		<%= f.label "copyrighted", "Photo is copyrighted" %> 
+		<!-- this is a Rails helper for label -->
+	</p>
+	<p>
 		<!-- button_text is a variable defined in the edit and new views -->
 		<%= f.submit button_text %> 
 	</p>

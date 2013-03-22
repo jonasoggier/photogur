@@ -17,7 +17,7 @@ class PicturesController < ApplicationController
 		if @picture.save # returns true or false 
 			redirect_to pictures_path
 		else
-			flash.now[:error] = "Could not save the picture"
+			flash.now[:error] = "Could not save the picture. Pls try again."
 			render :new  # render goes to controller and renders VIEW for #new action (without running the code in PicturesController#new!!) => keep existing data in form
 		end
 	end
@@ -33,6 +33,12 @@ class PicturesController < ApplicationController
 		else
 			# do something else
 		end
+	end
+
+	def destroy
+		@picture = Picture.find(params[:id])
+		@picture.destroy
+		redirect_to pictures_path
 	end
 
 end
