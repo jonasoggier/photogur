@@ -1,7 +1,11 @@
 class PicturesController < ApplicationController
 	
 	def index
-		@pictures = Picture.all   #returns a collection (in the form of an array) of pictures (which are instances of the Picture class)
+		if params[:copyrighted] == "true" # /pictures?copyrighted=true
+			@pictures = Picture.where(:copyrighted => true).all
+		else
+			@pictures = Picture.all
+		end
 	end
 
 	def show
