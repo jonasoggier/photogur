@@ -12,18 +12,13 @@ class PicturesController < ApplicationController
 		@picture = Picture.new
 	end
 
-	def create  # we could use the same notation as for the 'update' method below
-		# @picture = Picture.new
-		# @picture.title = params[:title]
-		# @picture.artist = params[:artist]
-		# @picture.url = params[:url]
-		
+	def create  		
 		@picture = Picture.new(params[:picture])  
-		if @picture.save
+		if @picture.save # returns true or false 
 			redirect_to pictures_path
 		else
 			flash.now[:error] = "Could not save the picture"
-			render :new  # render goes to controller and renders VIEW for #new action (without running the code in PicturesController#new!!) => keep data in form
+			render :new  # render goes to controller and renders VIEW for #new action (without running the code in PicturesController#new!!) => keep existing data in form
 		end
 	end
 

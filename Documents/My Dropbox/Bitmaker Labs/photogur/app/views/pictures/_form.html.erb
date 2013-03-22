@@ -1,0 +1,25 @@
+<%= form_for @picture do |f| %>  
+	<p>
+		<label>Artist</label><br>
+		<% if @picture.errors.messages[:artist] %>
+			<p><%= @picture.errors.messages[:artist][0] %></p>
+		<% end %>
+		<!-- alternatively: @picture.errors[:artist].first -->
+		<%= f.text_field "artist" %>
+	</p>	
+	<p>
+		<label>Title</label><br>
+		<!-- we can access value directly (without the "messages") -->
+		<%= @picture.errors[:title].first %> 
+		<%= f.text_field "title" %>
+	</p>
+	<p>
+		<label>URL</label><br>
+		<%= @picture.errors[:url].first %>
+		<%= f.text_field "url" %>
+	</p>
+	<p>
+		<!-- button_text is a variable defined in the edit and new views -->
+		<%= f.submit button_text %> 
+	</p>
+<% end %>

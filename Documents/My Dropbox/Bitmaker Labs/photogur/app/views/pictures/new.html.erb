@@ -4,26 +4,4 @@
 	<%= flash[:error] %>
 </div>
 
-<%= form_for @picture do |f| %>  <!-- Rails knows where to post because it understands the routes for the "new" action in routes.rb -->
-	<p>
-		<label>Artist</label><br>
-		<% if @picture.errors.messages[:artist] %>
-			<p><%= @picture.errors.messages[:artist][0] %></p>
-		<% end %>
-		<!-- alternatively: @picture.errors[:artist].first -->
-		<%= f.text_field "artist" %>
-	</p>	
-	<p>
-		<label>Title</label><br>
-		<%= @picture.errors[:title].first %>
-		<%= f.text_field "title" %>
-	</p>
-	<p>
-		<label>URL</label><br>
-		<%= @picture.errors[:url].first %>
-		<%= f.text_field "url" %>
-	</p>
-	<p>
-		<%= f.submit "Save" %>
-	</p>
-<% end %>
+<%= render :partial => "form", :locals => {:button_text => "Save"} %>

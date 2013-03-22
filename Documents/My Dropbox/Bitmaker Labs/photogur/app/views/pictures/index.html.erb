@@ -4,10 +4,11 @@
 	<h2><%= picture.title %></h2>
 	<h3><%= picture.artist %></h3>
 	
-	<%= link_to picture do %>  <!-- this is the way to do with 	links on images... -->
+	<!-- this is the way to deal with links on images... -->
+	<%= link_to picture do %>  
 		<img src="<%= picture.url %>">
 	<% end %>
 
-	<%= button_to "Show Details", picture, :method => :get %></p>  
-	<!-- alt: link_to "...", picture_path(picture) -->
+	<%= button_to "Show Details", picture, :method => :get %></p><!-- alt: link_to "...", picture_path(picture) -->
+	
 <% end %>
