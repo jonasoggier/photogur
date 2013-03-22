@@ -1,14 +1,16 @@
 <h1>Index of all pictures</h1>
 
+<%= link_to "Copyrighted pictures only", pictures_path(:copyrighted => true) %>
+
 <% @pictures.each do |picture| %>
 	<h2><%= picture.title %></h2>
 	<h3><%= picture.artist %></h3>
 	
 	<!-- this is the way to deal with links on images... -->
 	<%= link_to picture do %>  
-		<img src="<%= picture.url %>">
+		<%= image_tag picture.url %>
 	<% end %>
 
 	<%= button_to "Show Details", picture, :method => :get %></p><!-- alt: link_to "...", picture_path(picture) -->
-	
+
 <% end %>

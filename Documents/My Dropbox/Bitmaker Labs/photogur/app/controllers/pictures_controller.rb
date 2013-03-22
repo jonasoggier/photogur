@@ -2,9 +2,9 @@ class PicturesController < ApplicationController
 	
 	def index
 		if params[:copyrighted] == "true" # /pictures?copyrighted=true
-			@pictures = Picture.where(:copyrighted => true).all
+			@pictures = Picture.where(:copyrighted => true).alphabetical.all
 		else
-			@pictures = Picture.all
+			@pictures = Picture.alphabetical.all
 		end
 	end
 
